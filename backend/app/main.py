@@ -6,6 +6,8 @@ from app.db.base import Base
 from app.db.session import engine
 from app.models.task import Task
 
+from app.api.tasks import router as tasks_router
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -23,6 +25,8 @@ app = FastAPI(
     title="Mini Task Tracker with AI",
     lifespan=lifespan,
 )
+
+app.include_router(tasks_router)
 
 
 @app.get("/")
