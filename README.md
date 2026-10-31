@@ -1,81 +1,104 @@
-# ai-task-tracker
+# Mini Task Tracker with AI
 
-Приложение для управления задачами с поддержкой искусственного интеллекта, которое помогает пользователям организовывать дела, расставлять приоритеты и повышать продуктивность.
+A task management application with user authentication, task tracking and an AI assistant powered by Groq.
 
-## О проекте
+## Features
 
-Mini Task Tracker with AI — проект, разрабатываемый в рамках хакатона. Его цель — объединить удобное управление задачами с возможностями искусственного интеллекта, чтобы упростить планирование и организацию повседневных дел.
+- User registration and login
+- Secure password hashing
+- JWT authentication
+- Create, read, update and delete tasks (CRUD)
+- Task descriptions
+- Task priorities (Low, Medium, High)
+- Task deadlines (date and time)
+- Mark tasks as completed
+- Search and filter tasks
+- Personal task lists for each user
+- AI assistant for task management and planning
 
-## Возможности
+## Tech Stack
 
-- Управление задачами — создание, просмотр, редактирование и удаление задач.
-- Приоритеты задач — сортировка задач по приоритету и статусу.
-- ИИ-помощник — помощь в организации задач и генерация рекомендаций.
-- REST API — взаимодействие с задачами и пользователями через API.
-- Аутентификация — защита учётных записей и личных задач пользователей.
+### Backend
+- Python 3.14
+- FastAPI
+- Uvicorn
+- SQLAlchemy (async)
+- SQLite
+- Pydantic
+- Alembic
+- PyJWT
+- pwdlib
+- Groq API
 
-> Примечание: перечисленные возможности запланированы и будут реализованы в процессе разработки.
+### Frontend
+- React
+- JavaScript
+- Vite
+- CSS
+- Axios
 
-## Технологический стек
+## Project Structure
 
-- Язык программирования: Python
-- Backend: FastAPI
-- База данных: SQLite
-- ORM: SQLAlchemy
-- Валидация данных: Pydantic
-- Аутентификация: JWT
-- Документация API: Swagger UI
-
-## Структура проекта
-
+```text
 ai-task-tracker/
 ├── backend/
 │   └── app/
+│       ├── api/
 │       ├── core/
 │       ├── db/
 │       ├── models/
 │       ├── schemas/
-│       ├── api/
 │       ├── services/
 │       └── main.py
 ├── frontend/
+│   └── src/
+├── migrations/
+├── .env
 ├── .gitignore
+├── alembic.ini
+├── pyproject.toml
+├── poetry.lock
 └── README.md
-## Установка и запуск
+```
 
-### 1. Клонирование репозитория
+## Installation
 
+### 1. Clone the repository
+
+```bash
 git clone https://github.com/nekooraw/ai-task-tracker.git
 cd ai-task-tracker
-### 2. Создание виртуального окружения
+```
 
-python -m venv .venv
-source .venv/bin/activate
-### 3. Установка зависимостей
+### 2. Install backend dependencies
 
-pip install -r requirements.txt
-### 4. Запуск приложения
+```bash
+poetry install
+```
 
-uvicorn app.main:app --reload --app-dir backend
-После запуска сервера документация API будет доступна по адресу:
+### 3. Configure environment variables
 
-- API: http://127.0.0.1:8000/
-- Swagger UI: http://127.0.0.1:8000/docs
+Create a `.env` file in the project root:
 
-## Статус разработки
+```env
+SECRET_KEY=your_secret_key
+GROQ_API_KEY=your_groq_api_key
+```
 
-🚧 Проект находится в разработке в рамках хакатона.
+Replace the placeholder values with your own keys.
 
-## Планы на будущее
+### 4. Apply database migrations
 
-- Разбиение сложных задач на небольшие шаги с помощью ИИ.
-- Умная расстановка приоритетов.
-- Регистрация и авторизация пользователей.
-- Персональные списки задач.
-- Улучшение интерфейса и пользовательского опыта.
-- Автоматизированное тестирование.
-- Развёртывание приложения.
+```bash
+poetry run alembic upgrade head
+```
 
-## Лицензия
+### 5. Start the backend
 
-Лицензия проекта пока не выбрана.
+```bash
+poetry run uvicorn app.main:app --reload --app-dir backend
+```
+
+Backend runs at:
+
+`http
